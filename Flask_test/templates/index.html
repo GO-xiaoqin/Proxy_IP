@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Proxy IP</title>
+<meta charset="utf-8">
+
+<style>
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 0.8em;
+    }
+
+    header, footer, section, article {
+        border: 1px solid grey;
+        margin: 5px 5px 15px;
+        padding: 6px;
+        background-color: white;
+    }
+
+    hr {
+        margin: 5px 5px 15px;
+        padding: 1px;
+    }
+
+    header, footer {
+        color: white;
+        background-color: #444;
+        margin-bottom: 5px;
+    }
+
+    section {
+        background-color: #ddd;
+    }
+
+    h1, h2 {
+        text-align: center;
+    }
+
+    h3 {
+       text-indent: 30px;
+    }
+
+    .proxy_ip table {
+        position: relative;
+        left: 50px;
+        padding: 10px 30px;
+        margin: 15px 5px;
+    }
+
+    .proxy_ip td {
+        padding: 10px 60px;
+    }
+
+
+</style>
+
+<body>
+
+<header>
+    <h1>Proxy IP</h1>
+</header>
+
+<hr noshade="false">
+
+<section>
+    <h3>Available proxy IP</h3>
+
+    <div class="proxy_ip">
+        <table>
+            <tr>
+                <th>GET or POST</th>
+                <th>HTTP or HTTPS</th>
+                <th>IP</th>
+                <th>Port</th>
+                <th>Proxy</th>
+                <th>Score</th>
+            </tr>
+            {% for i in obj[::-1] %}
+                <tr>
+                    <td>{{ i[0].split()[0] }}</td>
+                    <td>{{ i[0].split()[1].split(":")[0] }}</td>
+                    <td>{{ i[0].split()[1].split(":")[1][2:] }}</td>
+                    <td>{{ i[0].split()[1].split(":")[2] }}</td>
+                    <td>{{ i[0].split()[1] }}</td>
+                    <td>{{ i[1] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</section>
+
+<footer>
+    <h2>End</h2>
+    <p align="right">Author: Xiao Qin</p>
+</footer>
+
+</body>
+</html>
