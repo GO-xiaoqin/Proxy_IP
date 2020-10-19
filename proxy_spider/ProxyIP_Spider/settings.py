@@ -108,7 +108,7 @@ LOG_FORMAT = "%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)
 # redis config
 REDIS_HOST = "127.0.0.1"
 REDIS_PORT = 6379
-REDIS_PWD = "Xu551212"
+REDIS_PWD = "pwd" # redis 密码
 
 # splash init
 SPLASH_URL = 'http://127.0.0.1:8050'
