@@ -60,7 +60,7 @@ if __name__ == "__main__":
     redis = RedisPool(
         "127.0.0.1",
         6379,
-        "Xu551212"
+        "pwd" # 密码
     )
     # test = redis.check_proxy(proxy="bb", name="test")
     # test = redis.get_proxy()
