@@ -2,7 +2,7 @@ from flask import Flask, render_template, json
 from flask_redis import FlaskRedis
 
 app = Flask(__name__)
-app.config['REDIS_URL'] = "redis://:Xu551212@127.0.0.1:6379/0"
+app.config['REDIS_URL'] = "redis://:pwd@127.0.0.1:6379/0"   # pwd填 redis 密码，没有可忽略
 redis_client = FlaskRedis(app)
 
 
