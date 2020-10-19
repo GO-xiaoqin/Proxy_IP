@@ -32,6 +32,36 @@ scrapyd 服务端，项目的一下主要程序代码(日志清理、redis 废�
 ### spiderkeeper：
 spiderkeeper 客户端，由于我是单独一个虚拟环境，所以索性也单独一个文件夹，输出日志同 scrapyd 一样，具体移步文件夹下的启动文件。
 
+### Flask_test：  
+Flask框架、uwsgi 等，由于不是一个前端人员，就简单搞了一个前段页面显示一下，启动文件 .sh 文件，这里 uwsgi.ini 配置文件时，由于我的 nginx 是 docker 的， 所以 socket 的 ip 是 docker 桥接局域网的ip，我个人理解就是，用电脑开了一个热点，如果想让连接热点的手机链到开热点的电脑，就需要当前热点的网关，这个是个人理解，如有不对请留言指正。当然也可以不用 docker 或者在创建 容器时，映射一个地址。uwsgi.ini 配置文件其他参数可以在网上搜到。还有 uwsgi.log 我没有做日志分割，想做的也可以做一下。
 
+### Docker：  
+docker nginx 搭建网上也是有教程的，这里附上一份 .conf 文件仅供参考。
 
-未完待续！！！
+```conf
+server {
+    listen       80 default_server;
+    server_name  0.0.0.0;	# 公网地址 IP ，也可以是本地地址
+
+    #动态请求
+    location / {
+        include uwsgi_params;
+        uwsgi_pass 172.17.0.1:8000; 	# 这里转接给 uwsgi (开热点的电脑)
+    }
+}
+
+```
+
+docker redis 就是简单拉取一个镜像，做了一些简单的配置。
+
+```conf
+#bind 127.0.0.1
+protected-mode no
+daemonize no
+appendonly yes
+requirepass *******   # 密码
+```
+
+## End  
+
+最后说一下，环境搭好还要打包 proxy_spider 为 .egg 文件上传到 scrapyd 加定时任务使用，这里你也可以选择其他组件，替换掉 spiderkeeper 也可以，简单折腾，如有不对，请留言指正。
